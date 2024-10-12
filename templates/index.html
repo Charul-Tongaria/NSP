@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Data Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="bg-animation"></div> <!-- Background Animation -->
+
+    <header class="header-section">
+        <h1>COVID-19 Data Analysis</h1>
+        <p>Explore the global impact of COVID-19 on health, education, and vaccination efforts</p>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>About This Project</h2>
+            <p>
+                The COVID-19 pandemic has had a profound impact on the world, affecting virtually every aspect of daily life, including health, education, and economic systems. 
+                This project aims to provide a detailed analysis of the available COVID-19 data, focusing on key areas such as:
+            </p>
+
+            <ul>
+                <li><strong>Health Impact:</strong> We analyze the spread of the virus, the number of cases, and the mortality rates across different countries.</li>
+                <li><strong>Liver Cancer Research:</strong> The project investigates how the pandemic has influenced liver cancer treatments and outcomes, particularly in countries that were severely affected by COVID-19.</li>
+                <li><strong>Educational Disruption:</strong> We study how COVID-19 impacted education globally, tracking school closures, shifts to online learning, and the long-term effects on students' academic progress.</li>
+                <li><strong>Vaccination Efforts:</strong> The analysis extends to vaccination campaigns, comparing the rate of vaccinations in different countries and how effective these campaigns have been in curbing the spread of the virus.</li>
+            </ul>
+
+            <div class="button-container">
+                <a href="/analysis" class="analysis-button">Go to Analysis</a><br>
+            </div>
+
+            <h2>COVID-19 Data Sources</h2>
+            <ul>
+                <li><a href="https://ourworldindata.org/coronavirus" target="_blank">Our World in Data</a></li>
+                <li><a href="https://data.worldbank.org/" target="_blank">World Bank Data</a></li>
+                <li><a href="https://www.who.int/" target="_blank">World Health Organization</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer-section">
+        <p>&copy; 2024 COVID-19 Data Analysis Project. All rights reserved.</p>
+    </footer>
+</body>
+</html>

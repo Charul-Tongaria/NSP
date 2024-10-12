@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Page</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <div class="bg-animation"></div> <!-- Background Animation -->
+
+    <div class="container">
+        <h1 style="color: #970747;">COVID-19 Data Analysis</h1>
+
+        <div class="heading-info">
+            <p style="text-align: center;">Below we present several key analyses, including the top countries affected by COVID-19, the impact on liver cancer, education, and global vaccination efforts.</p><br>
+        </div>
+
+        <!-- Overall Charts -->
+        <h2 style="color: #446878;">Top 20 Countries Affected by COVID-19</h2>
+        <div class="chart-container">
+            <img src="{{ url_for('static', filename='top_20_countries.png') }}" alt="Top 20 Countries Affected by COVID-19" />
+        </div>
+
+        <h2 style="color: #446878;">Impact of COVID-19 on Liver Cancer</h2>
+        <div class="chart-container">
+            <img src="{{ url_for('static', filename='liver_cancer_impact.png') }}" alt="Impact of COVID-19 on Liver Cancer" />
+        </div>
+
+        <h2 style="color: #446878;">Impact of COVID-19 on Education</h2>
+        <div class="chart-container">
+            <img src="{{ url_for('static', filename='education_impact.png') }}" alt="Impact of COVID-19 on Education" />
+        </div>
+
+        <h2 style="color: #446878;">Total Vaccinations Across Countries</h2>
+        <div class="chart-container">
+            <img src="{{ url_for('static', filename='vaccination_status.png') }}" alt="Total Vaccinations Across Countries" />
+        </div>
+
+        <!-- Country-specific Analysis -->
+        <h2 style="color: #970747;">Country Selection for Detailed Analysis</h2>
+        <form method="post" action="{{ url_for('analysis') }}">
+            <label for="country">Select Country:</label>
+            <select name="country" id="country">
+                {% for country in countries %}
+                    <option value="{{ country }}">{{ country }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+
+        {% if selected_country %}
+        <h2 style="color: #446878;">Selected Country: {{ selected_country }}</h2>
+        <h3>Detailed Analysis</h3>
+        
+        <!-- Country-specific Line Charts -->
+        <div class="chart-container">
+            <h2 style="color: #446878;">COVID-19 Confirmed Cases Over Time</h2>
+            <img src="{{ url_for('static', filename='covid_data_country.png') }}" alt="COVID Data for {{ selected_country }}" />
+
+            <h2 style="color: #446878;">Education Impact Over Time</h2>
+            <img src="{{ url_for('static', filename='education_country.png') }}" alt="Education Impact in {{ selected_country }}" />
+
+            <h2 style="color: #446878;">Vaccination Progress Over Time</h2>
+            <img src="{{ url_for('static', filename='vaccination_country.png') }}" alt="Vaccination Data in {{ selected_country }}" />
+        </div>
+        {% endif %}
+        
+        <div class="button-container">
+            <a href="/" class="back-button">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
