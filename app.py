@@ -24,7 +24,7 @@ matplotlib.use('Agg')
 def plot_top_countries():
     plt.figure(figsize=(12, 6))
     top_20 = covid_data.groupby('Country/Region')['Confirmed'].sum().sort_values(ascending=False).head(20)
-    ax = top_20.plot(kind='bar', color=['#C96868','#FADFA1','#7EACB5','#A5B68D','#CDC1FF'])
+    ax = top_20.plot(kind='bar', color=['#003f5c', '#2f4b7c', '#665191', '#a05195', '#d45087', '#2a9d8f', '#52b788', '#76c893', '#99d98c', '#b5e48c', '#e63946', '#f28482', '#f8b4a5', '#fbb6b9', '#ffcad4', '#f4a261', '#e76f51', '#ffb703', '#fb8500', '#ffa600'])
 
     # Add percentage on top of bars
     for p in ax.patches:
@@ -39,6 +39,106 @@ def plot_top_countries():
     plt.legend(['Confirmed Cases'], loc='upper right')  # Move scale to top-right
     plt.tight_layout()
     plt.savefig('static/top_20_countries.png')
+    plt.close()
+
+def plot_top_countries_deaths():
+    plt.figure(figsize=(12, 6))
+    top_20 = covid_data.groupby('Country/Region')['Deaths'].sum().sort_values(ascending=False).head(20)
+    ax = top_20.plot(kind='bar', color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#ff6347', '#4682b4', '#32cd32', '#ffd700', '#da70d6', '#8b0000', '#00ced1', '#ff69b4', '#6495ed', '#ff4500'])
+
+    # Add percentage on top of bars
+    for p in ax.patches:
+        percentage = '{:.1f}%'.format((p.get_height() / covid_data['Deaths'].sum()) * 100)
+        ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
+                    ha='center', va='bottom')
+
+    # Set labels and title
+    plt.xlabel('Country/Region')
+    plt.ylabel('Total Deaths (in millions)')
+    plt.xticks(rotation=45)
+    plt.legend(['Deaths'], loc='upper right')  # Move scale to top-right
+    plt.tight_layout()
+    plt.savefig('static/top_20_countries_deaths.png')
+    plt.close()
+
+def plot_top_countries_recovered():
+    plt.figure(figsize=(12, 6))
+    top_20 = covid_data.groupby('Country/Region')['Recovered'].sum().sort_values(ascending=False).head(20)
+    ax = top_20.plot(kind='bar', color=['#556b2f', '#ff8c00', '#9932cc', '#8b4513', '#ff1493', '#00fa9a', '#8a2be2', '#5f9ea0', '#7cfc00', '#dc143c', '#b8860b', '#4169e1', '#ffdead', '#ff4500', '#2e8b57', '#ffa07a', '#20b2aa', '#ba55d3', '#ff6347', '#6a5acd'])
+
+    # Add percentage on top of bars
+    for p in ax.patches:
+        percentage = '{:.1f}%'.format((p.get_height() / covid_data['Recovered'].sum()) * 100)
+        ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
+                    ha='center', va='bottom')
+
+    # Set labels and title
+    plt.xlabel('Country/Region')
+    plt.ylabel('Total Recovered Cases (in millions)')
+    plt.xticks(rotation=45)
+    plt.legend(['Recovered Cases'], loc='upper right')  # Move scale to top-right
+    plt.tight_layout()
+    plt.savefig('static/top_20_countries_recovered.png')
+    plt.close()
+
+def plot_top_countries_death_per_100_cases():
+    plt.figure(figsize=(12, 6))
+    top_20 = covid_data.groupby('Country/Region')['Deaths / 100 Cases'].sum().sort_values(ascending=False).head(20)
+    ax = top_20.plot(kind='bar', color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#ff6347', '#4682b4', '#32cd32', '#ffd700', '#da70d6', '#8b0000', '#00ced1', '#ff69b4', '#6495ed', '#ff4500'])
+
+    # Add percentage on top of bars
+    for p in ax.patches:
+        percentage = '{:.1f}%'.format((p.get_height() / covid_data['Deaths / 100 Cases'].sum()) * 100)
+        ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
+                    ha='center', va='bottom')
+
+    # Set labels and title
+    plt.xlabel('Country/Region')
+    plt.ylabel('Total Deaths / 100 Cases')
+    plt.xticks(rotation=45)
+    plt.legend(['Deaths / 100 Cases'], loc='upper right')  # Move scale to top-right
+    plt.tight_layout()
+    plt.savefig('static/top_20_countries_deaths_per_100_cases.png')
+    plt.close()
+
+def plot_top_countries_recovered_per_100_cases():
+    plt.figure(figsize=(12, 6))
+    top_20 = covid_data.groupby('Country/Region')['Recovered / 100 Cases'].sum().sort_values(ascending=False).head(20)
+    ax = top_20.plot(kind='bar', color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#ff6347', '#4682b4', '#32cd32', '#ffd700', '#da70d6', '#8b0000', '#00ced1', '#ff69b4', '#6495ed', '#ff4500'])
+
+    # Add percentage on top of bars
+    for p in ax.patches:
+        percentage = '{:.1f}%'.format((p.get_height() / covid_data['Recovered / 100 Cases'].sum()) * 100)
+        ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
+                    ha='center', va='bottom')
+
+    # Set labels and title
+    plt.xlabel('Country/Region')
+    plt.ylabel('Total Recovered / 100 Cases')
+    plt.xticks(rotation=45)
+    plt.legend(['Recovered / 100 Cases'], loc='upper right')  # Move scale to top-right
+    plt.tight_layout()
+    plt.savefig('static/top_20_countries_recovered_per_100_cases.png')
+    plt.close()
+
+def plot_top_countries_deaths_per_100_cases():
+    plt.figure(figsize=(12, 6))
+    top_20 = covid_data.groupby('Country/Region')['Deaths / 100 Recovered'].sum().sort_values(ascending=False).head(20)
+    ax = top_20.plot(kind='bar', color=['#556b2f', '#ff8c00', '#9932cc', '#8b4513', '#ff1493', '#00fa9a', '#8a2be2', '#5f9ea0', '#7cfc00', '#dc143c', '#b8860b', '#4169e1', '#ffdead', '#ff4500', '#2e8b57', '#ffa07a', '#20b2aa', '#ba55d3', '#ff6347', '#6a5acd'])
+
+    # Add percentage on top of bars
+    for p in ax.patches:
+        percentage = '{:.1f}%'.format((p.get_height() / covid_data['Deaths / 100 Recovered'].sum()) * 100)
+        ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
+                    ha='center', va='bottom')
+
+    # Set labels and title
+    plt.xlabel('Country/Region')
+    plt.ylabel('Total Deaths / 100 Recovered')
+    plt.xticks(rotation=45)
+    plt.legend(['Deaths / 100 Recovered'], loc='upper right')  # Move scale to top-right
+    plt.tight_layout()
+    plt.savefig('static/top_20_countries_deaths_per_100_recovered.png')
     plt.close()
 
 # Function to analyze liver cancer data
@@ -86,7 +186,7 @@ def plot_education_impact():
 def plot_vaccination_status():
     plt.figure(figsize=(10, 6))
     top_20_vaccinations = vaccination_data.groupby('country')['total_vaccinations'].sum().sort_values(ascending=False).head(20)
-    ax = top_20_vaccinations.plot(kind='bar', color=['#C96868','#FADFA1','#7EACB5','#A5B68D','#CDC1FF'])
+    ax = top_20_vaccinations.plot(kind='bar', color=['#556b2f', '#ff8c00', '#9932cc', '#8b4513', '#ff1493', '#00fa9a', '#8a2be2', '#5f9ea0', '#7cfc00', '#dc143c', '#b8860b', '#4169e1', '#ffdead', '#ff4500', '#2e8b57', '#ffa07a', '#20b2aa', '#ba55d3', '#ff6347', '#6a5acd'])
 
     # Add percentage on top of bars
     total_vaccinations = vaccination_data['total_vaccinations'].sum()
