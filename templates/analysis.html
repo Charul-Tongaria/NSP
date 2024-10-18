@@ -37,16 +37,6 @@
             <img src="{{ url_for('static', filename='top_20_countries_deaths_per_100_cases.png') }}" alt="Top 20 Countries Affected by COVID-19 (Deaths / 100 Cases)" />
         </div>
 
-        <h2 style="color: #446878;">Top 20 Countries Affected by COVID-19 (Recovered / 100 Cases)</h2>
-        <div class="chart-container">
-            <img src="{{ url_for('static', filename='top_20_countries_recovered_per_100_cases.png') }}" alt="Top 20 Countries Affected by COVID-19 (Recovered / 100 Cases)" />
-        </div>
-
-        <h2 style="color: #446878;">Top 20 Countries Affected by COVID-19 (Deaths / 100 Recovered)</h2>
-        <div class="chart-container">
-            <img src="{{ url_for('static', filename='top_20_countries_deaths_per_100_recovered.png') }}" alt="Top 20 Countries Affected by COVID-19 (Deaths / 100 Recovered)" />
-        </div>
-
         <h2 style="color: #446878;">Impact of COVID-19 on Liver Cancer</h2>
         <div class="chart-container">
             <img src="{{ url_for('static', filename='liver_cancer_impact.png') }}" alt="Impact of COVID-19 on Liver Cancer" />
@@ -88,6 +78,7 @@
 
             <h2 style="color: #446878;">Vaccination Progress Over Time</h2>
             <img src="{{ url_for('static', filename='vaccination_country.png') }}" alt="Vaccination Data in {{ selected_country }}" />
+
         </div>
         {% endif %}
         

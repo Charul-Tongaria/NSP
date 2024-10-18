@@ -30,10 +30,10 @@ def plot_top_countries():
     for p in ax.patches:
         percentage = '{:.1f}%'.format((p.get_height() / covid_data['Confirmed'].sum()) * 100)
         ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
-                    ha='center', va='bottom')
+                     ha='center', va='bottom') 
 
     # Set labels and title
-    plt.xlabel('Country/Region')
+    plt.xlabel('Country/Region')                         
     plt.ylabel('Total Confirmed Cases (in millions)')
     plt.xticks(rotation=45)
     plt.legend(['Confirmed Cases'], loc='upper right')  # Move scale to top-right
@@ -46,7 +46,7 @@ def plot_top_countries_deaths():
     top_20 = covid_data.groupby('Country/Region')['Deaths'].sum().sort_values(ascending=False).head(20)
     ax = top_20.plot(kind='bar', color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#ff6347', '#4682b4', '#32cd32', '#ffd700', '#da70d6', '#8b0000', '#00ced1', '#ff69b4', '#6495ed', '#ff4500'])
 
-    # Add percentage on top of bars
+    # Add percentage on top of bars 
     for p in ax.patches:
         percentage = '{:.1f}%'.format((p.get_height() / covid_data['Deaths'].sum()) * 100)
         ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
@@ -58,7 +58,7 @@ def plot_top_countries_deaths():
     plt.xticks(rotation=45)
     plt.legend(['Deaths'], loc='upper right')  # Move scale to top-right
     plt.tight_layout()
-    plt.savefig('static/top_20_countries_deaths.png')
+    plt.savefig('static/top_20_countries_deaths.png')                     
     plt.close()
 
 def plot_top_countries_recovered():
@@ -81,7 +81,7 @@ def plot_top_countries_recovered():
     plt.savefig('static/top_20_countries_recovered.png')
     plt.close()
 
-def plot_top_countries_death_per_100_cases():
+def plot_top_countries_deaths_per_100_cases():
     plt.figure(figsize=(12, 6))
     top_20 = covid_data.groupby('Country/Region')['Deaths / 100 Cases'].sum().sort_values(ascending=False).head(20)
     ax = top_20.plot(kind='bar', color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#ff6347', '#4682b4', '#32cd32', '#ffd700', '#da70d6', '#8b0000', '#00ced1', '#ff69b4', '#6495ed', '#ff4500'])
@@ -99,46 +99,6 @@ def plot_top_countries_death_per_100_cases():
     plt.legend(['Deaths / 100 Cases'], loc='upper right')  # Move scale to top-right
     plt.tight_layout()
     plt.savefig('static/top_20_countries_deaths_per_100_cases.png')
-    plt.close()
-
-def plot_top_countries_recovered_per_100_cases():
-    plt.figure(figsize=(12, 6))
-    top_20 = covid_data.groupby('Country/Region')['Recovered / 100 Cases'].sum().sort_values(ascending=False).head(20)
-    ax = top_20.plot(kind='bar', color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#ff6347', '#4682b4', '#32cd32', '#ffd700', '#da70d6', '#8b0000', '#00ced1', '#ff69b4', '#6495ed', '#ff4500'])
-
-    # Add percentage on top of bars
-    for p in ax.patches:
-        percentage = '{:.1f}%'.format((p.get_height() / covid_data['Recovered / 100 Cases'].sum()) * 100)
-        ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
-                    ha='center', va='bottom')
-
-    # Set labels and title
-    plt.xlabel('Country/Region')
-    plt.ylabel('Total Recovered / 100 Cases')
-    plt.xticks(rotation=45)
-    plt.legend(['Recovered / 100 Cases'], loc='upper right')  # Move scale to top-right
-    plt.tight_layout()
-    plt.savefig('static/top_20_countries_recovered_per_100_cases.png')
-    plt.close()
-
-def plot_top_countries_deaths_per_100_cases():
-    plt.figure(figsize=(12, 6))
-    top_20 = covid_data.groupby('Country/Region')['Deaths / 100 Recovered'].sum().sort_values(ascending=False).head(20)
-    ax = top_20.plot(kind='bar', color=['#556b2f', '#ff8c00', '#9932cc', '#8b4513', '#ff1493', '#00fa9a', '#8a2be2', '#5f9ea0', '#7cfc00', '#dc143c', '#b8860b', '#4169e1', '#ffdead', '#ff4500', '#2e8b57', '#ffa07a', '#20b2aa', '#ba55d3', '#ff6347', '#6a5acd'])
-
-    # Add percentage on top of bars
-    for p in ax.patches:
-        percentage = '{:.1f}%'.format((p.get_height() / covid_data['Deaths / 100 Recovered'].sum()) * 100)
-        ax.annotate(percentage, (p.get_x() + p.get_width() / 2, p.get_height()), 
-                    ha='center', va='bottom')
-
-    # Set labels and title
-    plt.xlabel('Country/Region')
-    plt.ylabel('Total Deaths / 100 Recovered')
-    plt.xticks(rotation=45)
-    plt.legend(['Deaths / 100 Recovered'], loc='upper right')  # Move scale to top-right
-    plt.tight_layout()
-    plt.savefig('static/top_20_countries_deaths_per_100_recovered.png')
     plt.close()
 
 # Function to analyze liver cancer data
@@ -211,6 +171,9 @@ def index():
 @app.route('/analysis', methods=['GET', 'POST'])
 def analysis():
     plot_top_countries()
+    plot_top_countries_deaths()
+    plot_top_countries_recovered()
+    plot_top_countries_deaths_per_100_cases()
     plot_liver_cancer()
     plot_education_impact()
     plot_vaccination_status()
